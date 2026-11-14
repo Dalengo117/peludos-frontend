@@ -1,0 +1,39 @@
+<main class="auth-pagina">
+  <section class="tarjeta auth-tarjeta">
+    <div class="auth-marca">
+      <span class="auth-logo">🐾</span>
+      <h1>PeludOS</h1>
+      <p>Ingresa para cuidar a tus mascotas</p>
+    </div>
+
+    @if (error()) {
+      <div class="alerta alerta-error">{{ error() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+      <div class="campo">
+        <label for="correo">Correo electrónico</label>
+        <input id="correo" type="email" formControlName="correo"
+               autocomplete="email" [class.invalido]="invalido('correo')">
+        @if (invalido('correo')) {
+          <span class="campo-error">Ingresa un correo válido</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="contrasena">Contraseña</label>
+        <input id="contrasena" type="password" formControlName="contrasena"
+               autocomplete="current-password" [class.invalido]="invalido('contrasena')">
+        @if (invalido('contrasena')) {
+          <span class="campo-error">La contraseña es obligatoria</span>
+        }
+      </div>
+
+      <button type="submit" class="btn btn-primario btn-bloque" [disabled]="cargando()">
+        {{ cargando() ? 'Ingresando...' : 'Ingresar' }}
+      </button>
+    </form>
+
+    <p class="auth-pie">¿No tienes cuenta? <a routerLink="/registro">Regístrate</a></p>
+  </section>
+</main>
