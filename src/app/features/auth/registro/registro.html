@@ -1,0 +1,58 @@
+<main class="auth-pagina">
+  <section class="tarjeta auth-tarjeta">
+    <div class="auth-marca">
+      <span class="auth-logo">🐾</span>
+      <h1>Crear cuenta</h1>
+      <p>Únete a PeludOS</p>
+    </div>
+
+    @if (error()) {
+      <div class="alerta alerta-error">{{ error() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+      <div class="campo">
+        <label for="nombre">Nombre completo</label>
+        <input id="nombre" type="text" formControlName="nombre_completo"
+               [class.invalido]="invalido('nombre_completo')">
+        @if (invalido('nombre_completo')) {
+          <span class="campo-error">El nombre es obligatorio (mín. 3 letras)</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="correo">Correo electrónico</label>
+        <input id="correo" type="email" formControlName="correo_electronico"
+               [class.invalido]="invalido('correo_electronico')">
+        @if (invalido('correo_electronico')) {
+          <span class="campo-error">Ingresa un correo válido</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="contrasena">Contraseña</label>
+        <input id="contrasena" type="password" formControlName="contrasena"
+               [class.invalido]="invalido('contrasena')">
+        @if (invalido('contrasena')) {
+          <span class="campo-error">La contraseña debe tener al menos 6 caracteres</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="telefono">Teléfono (opcional)</label>
+        <input id="telefono" type="tel" formControlName="telefono">
+      </div>
+
+      <div class="campo">
+        <label for="direccion">Dirección (opcional)</label>
+        <input id="direccion" type="text" formControlName="direccion">
+      </div>
+
+      <button type="submit" class="btn btn-primario btn-bloque" [disabled]="cargando()">
+        {{ cargando() ? 'Creando cuenta...' : 'Registrarse' }}
+      </button>
+    </form>
+
+    <p class="auth-pie">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+  </section>
+</main>

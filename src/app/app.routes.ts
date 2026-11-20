@@ -13,5 +13,10 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import('./features/inicio/inicio').then(m => m.Inicio)
   },
+    {
+    path: 'registro',
+    canActivate: [guestGuard],
+    loadComponent: () => import('./features/auth/registro/registro').then(m => m.Registro)
+  },
   { path: '**', redirectTo: 'inicio' }
 ];
